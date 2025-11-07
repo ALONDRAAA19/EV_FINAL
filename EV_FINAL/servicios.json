@@ -1,0 +1,53 @@
+﻿[
+  {
+    "Id": 1,
+    "Nombre": "Manicure básico",
+    "Precio": 150.0
+  },
+  {
+    "Id": 2,
+    "Nombre": "Pedicure spa",
+    "Precio": 250.0
+  },
+  {
+    "Id": 3,
+    "Nombre": "Uñas acrílicas",
+    "Precio": 400.0
+  },
+  {
+    "Id": 4,
+    "Nombre": "Decoración artística",
+    "Precio": 120.0
+  },
+  {
+    "Id": 5,
+    "Nombre": "Retoque de acrílico",
+    "Precio": 180.0
+  },
+  {
+    "Id": 6,
+    "Nombre": "Gel semipermanente",
+    "Precio": 220.0
+  },
+  {
+    "Id": 7,
+    "Nombre": "Remoción de esmalte",
+    "Precio": 80.0
+  },
+  {
+    "Id": 8,
+    "Nombre": "Tratamiento hidratante",
+    "Precio": 160.0
+  },
+  {
+    "Id": 9,
+    "Nombre": "Uñas esculturales",
+    "Precio": 450.0
+  },
+  {
+    "Id": 10,
+    "Nombre": "Manicure infantil",
+    "Precio": 100.0
+  }
+]
+

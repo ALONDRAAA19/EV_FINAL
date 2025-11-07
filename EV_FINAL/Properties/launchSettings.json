@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "EV_FINAL (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "EV_FINAL (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
