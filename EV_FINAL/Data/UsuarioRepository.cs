@@ -1,37 +1,49 @@
-﻿using System;
+using EV_FINAL.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
-using EV_FINAL.Models;
 
-namespace EV_FINAL.Data;
-
-public class UsuarioRepository
+namespace EV_FINAL.Data
 {
-    private static readonly string RutaArchivo = Path.Combine(AppContext.BaseDirectory, "usuarios.json");
-
-    public List<Usuario> Cargar()
+    public class UsuarioRepository
     {
-        if (!File.Exists(RutaArchivo)) return new();
-        var json = File.ReadAllText(RutaArchivo);
-        return JsonSerializer.Deserialize<List<Usuario>>(json) ?? new();
-    }
+        private static readonly string RutaArchivo =
+            Path.Combine(AppContext.BaseDirectory, "usuarios.json");
 
-    public void Guardar(List<Usuario> usuarios)
-    {
-        var opciones = new JsonSerializerOptions { WriteIndented = true };
-        var json = JsonSerializer.Serialize(usuarios, opciones);
-        File.WriteAllText(RutaArchivo, json);
-    }
+        public List<Usuario> Cargar()
+        {
+            if (!File.Exists(RutaArchivo)) return new();
+            var json = File.ReadAllText(RutaArchivo);
+            return JsonSerializer.Deserialize<List<Usuario>>(json) ?? new();
+        }
 
-    public static bool ExisteUsuario(List<Usuario> lista, Usuario usuario)
-    {
-        return lista.Any(u => u.NombreUsuario.Equals(usuario.NombreUsuario, StringComparison.OrdinalIgnoreCase));
-    }
+        public bool Validar(string usuario, string password)
+        {
+            var lista = Cargar();
+            return lista.Exists(u =>
+                u.Usuario.Equals(usuario, StringComparison.OrdinalIgnoreCase) &&
+                u.Password == password);
+        }
 
-    public static bool ValidarCredenciales(List<Usuario> lista, string nombre, string contraseña)
-    {
-        return lista.Any(u => u.NombreUsuario.Equals(nombre, StringComparison.OrdinalIgnoreCase) && u.Contraseña == contraseña);
+        public bool ExisteUsuario(string usuario)
+        {
+            var lista = Cargar();
+            return lista.Exists(u =>
+                u.Usuario.Equals(usuario, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public bool Registrar(Usuario nuevo)
+        {
+            var lista = Cargar();
+
+            if (ExisteUsuario(nuevo.Usuario))
+                return false;
+
+            lista.Add(nuevo);
+            var json = JsonSerializer.Serialize(lista, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(RutaArchivo, json);
+            return true;
+        }
     }
 }
